@@ -1,4 +1,4 @@
-import disnake, asyncio
+import disnake
 from disnake.ext import commands
 
 prefix = '!'
@@ -9,7 +9,9 @@ bot = commands.Bot(
     intents = intents
 )
 
-TOKEN = ""
+with open("TOKEN.txt", 'r') as file:
+    TOKEN = file.read()
+
 
 
 ######################
@@ -18,6 +20,10 @@ TOKEN = ""
 
 
 
+@bot.event
+async def on_ready():
+    print("Bot connected.")
+
 
 
 ######################
@@ -25,9 +31,13 @@ TOKEN = ""
 ######################
 
 
+@bot.command()
+async def ping(ctx):
+    await ctx.send("Pong")
 
 
 ######################
+
 
 
 bot.run(TOKEN)
